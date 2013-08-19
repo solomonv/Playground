@@ -2,6 +2,7 @@ from xml.dom.minidom import parseString
 from sols_utils import utf8Toascii
 from Reddit import *
 import urllib2
+import urllib
 
 class RedditDataManager(object):
 
@@ -51,6 +52,7 @@ class RedditDataManager(object):
 		#print linkIndex, s
 		return s[linkIndex:-2]
 
+
 if __name__ == "__main__":
 	rdm = RedditDataManager("tiltshift");
 	rdm2 = RedditDataManager("aww")
@@ -59,5 +61,10 @@ if __name__ == "__main__":
 	# for item in rdm.getDescriptions():
 	# 	print "==========================\n" + item
 	#print rdm.parseDescriptions()
+	num = 0
 	for item in rdm.getDescriptions():
-		print item
+		if item.find("jpg") > 0:
+			urllib.urlretrieve(item, str(num)+".jpg")
+			num += 1
+			print item, num
+			
