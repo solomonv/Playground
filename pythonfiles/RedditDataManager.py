@@ -1,8 +1,7 @@
 from xml.dom.minidom import parseString
 from sols_utils import utf8Toascii
 from Reddit import *
-import urllib2
-import urllib
+import urllib2, urllib, os
 
 class RedditDataManager(object):
 
@@ -62,9 +61,12 @@ if __name__ == "__main__":
 	# 	print "==========================\n" + item
 	#print rdm.parseDescriptions()
 	num = 0
+	photoFile = r'./tiltshift/'
+	if not os.path.exists(photoFile): os.makedirs(photoFile)
 	for item in rdm.getDescriptions():
 		if item.find("jpg") > 0:
-			urllib.urlretrieve(item, str(num)+".jpg")
+			urllib.urlretrieve(item, photoFile+str(num)+".jpg")
 			num += 1
 			print item, num
+			
 			
